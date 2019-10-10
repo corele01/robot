@@ -52,6 +52,13 @@ steps:
     sshEndpoint: '华北2'
     contents: 'docker-run-$(Build.BuildId).sh'
     targetFolder: '/opt/application/'
+- task: SSH@0
+  inputs:
+    sshEndpoint: '华北2'
+    runOptions: 'commands'
+    commands: |
+      chmod +x /opt/application/docker-run-$(Build.BuildId).sh
+      /opt/application/docker-run-$(Build.BuildId).sh
 # - task: CopyFilesOverSSH@0
 #   inputs:
 #     sshEndpoint: '华北2'
