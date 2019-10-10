@@ -19,6 +19,12 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'clean package -Dmaven.test.skip=true'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      ls
+      echo Hello world
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: '华北2'
