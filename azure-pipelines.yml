@@ -40,9 +40,9 @@ steps:
   inputs:
     script: |
       echo Write your commands here
-      cat <<EOF
+      cat <<EOF > docker-run-$(Build.BuildId).sh
       docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot"
-      EOF > docker-run-$(Build.BuildId).sh
+      EOF
       cat docker-run-$(Build.BuildId).sh
       pwd
       ls
