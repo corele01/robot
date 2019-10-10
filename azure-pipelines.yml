@@ -24,6 +24,7 @@ steps:
     script: |
       echo Write your commands here
       ls
+      ls target
       echo Hello world
 - task: CopyFilesOverSSH@0
   inputs:
