@@ -19,9 +19,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package -Dmaven.test.skip=true'
-- task: CopyFilesOverSSH@0
+- task: Docker@2
   inputs:
-    sshEndpoint: '华北2'
-    sourceFolder: 'target'
-    contents: 'robot.jar'
-    targetFolder: '/opt/application/'
+    containerRegistry: 'robot'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+# - task: CopyFilesOverSSH@0
+#   inputs:
+#     sshEndpoint: '华北2'
+#     sourceFolder: 'target'
+#     contents: 'robot.jar'
+#     targetFolder: '/opt/application/'
