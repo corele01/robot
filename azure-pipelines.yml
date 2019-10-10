@@ -25,12 +25,14 @@ steps:
       echo docker start
       mkdir docker
       cp Dockerfile docker/
-      cp target/robot.jar docker
+      cp target/robot.jar docker/
       cd docker
       echo docker end
+
 - task: Docker@2
   inputs:
     containerRegistry: 'robot'
+    repository: 'robot'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 # - task: CopyFilesOverSSH@0
