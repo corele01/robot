@@ -35,6 +35,14 @@ steps:
     repository: 'corele/robot'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      cat <<EOF
+      docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot-$(Build.BuildId)"
+      EOF > docker-run.sh
+      echo Hello world
 # - task: CopyFilesOverSSH@0
 #   inputs:
 #     sshEndpoint: '华北2'
