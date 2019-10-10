@@ -27,6 +27,7 @@ steps:
       cp Dockerfile docker/
       cp target/robot.jar docker/
       cd docker
+      ls
       echo docker end
 
 - task: Docker@2
@@ -42,7 +43,9 @@ steps:
       cat <<EOF
       docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot"
       EOF > docker-run-$(Build.BuildId).sh
-      cat docker-run.sh
+      cat docker-run-$(Build.BuildId).sh
+      pwd
+      ls
       echo Hello world
 - task: CopyFilesOverSSH@0
   inputs:
