@@ -42,6 +42,7 @@ steps:
       cat <<EOF
       docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot-$(Build.BuildId)"
       EOF > docker-run.sh
+      cat docker-run.sh
       echo Hello world
 # - task: CopyFilesOverSSH@0
 #   inputs:
