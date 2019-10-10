@@ -40,10 +40,15 @@ steps:
     script: |
       echo Write your commands here
       cat <<EOF
-      docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot-$(Build.BuildId)"
-      EOF > docker-run.sh
+      docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot"
+      EOF > docker-run-$(Build.BuildId).sh
       cat docker-run.sh
       echo Hello world
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: '华北2'
+    contents: 'docker-run-$(Build.BuildId).sh'
+    targetFolder: '/opt/application/'
 # - task: CopyFilesOverSSH@0
 #   inputs:
 #     sshEndpoint: '华北2'
