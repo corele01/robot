@@ -28,6 +28,6 @@ steps:
       echo Hello world
 - task: CopyFilesOverSSH@0
   inputs:
-    sshEndpoint: 'hb2'
+    sshEndpoint: '华北2'
     sourceFolder: '/root/'
     contents: 'target/robot.jar'
