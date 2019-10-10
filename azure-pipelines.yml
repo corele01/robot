@@ -32,7 +32,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'robot'
-    repository: 'robot'
+    repository: 'corele/robot'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
 # - task: CopyFilesOverSSH@0
