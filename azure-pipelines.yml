@@ -18,14 +18,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean package -Dmaven.test.skip=true'
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Write your commands here
-      ls
-      ls target
-      echo Hello world
+    goals: 'package -Dmaven.test.skip=true'
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: '华北2'
