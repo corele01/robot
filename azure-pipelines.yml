@@ -19,6 +19,15 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package -Dmaven.test.skip=true'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo docker start
+      mkdir docker
+      cp Dockerfile docker/
+      cp target/robot.jar docker
+      cd docker
+      echo docker end
 - task: Docker@2
   inputs:
     containerRegistry: 'robot'
