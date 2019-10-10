@@ -29,5 +29,5 @@ steps:
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: '华北2'
-    sourceFolder: 'target/robot.jar'
-    contents: '**'
+    sourceFolder: '/root/'
+    contents: 'target/robot.jar'
