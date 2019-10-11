@@ -19,11 +19,46 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package -Dmaven.test.skip=true'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo docker start
+      mkdir docker
+      cp Dockerfile docker/
+      cp target/robot.jar docker/
+      cd docker
+      ls
+      echo docker end
+
 - task: Docker@2
   inputs:
     containerRegistry: 'robot'
+    repository: 'corele/robot'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      cat <<EOF > docker-run-$(Build.BuildId).sh
+      docker run -p 8080:8080 corele/robot:$(Build.BuildId) --name="robot"
+      EOF
+      cat docker-run-$(Build.BuildId).sh
+      pwd
+      ls
+      echo Hello world
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: '华北2'
+    contents: 'docker-run-$(Build.BuildId).sh'
+    targetFolder: '/opt/application/'
+- task: SSH@0
+  inputs:
+    sshEndpoint: '华北2'
+    runOptions: 'commands'
+    commands: |
+      chmod +x /opt/application/docker-run-$(Build.BuildId).sh
+      /opt/application/docker-run-$(Build.BuildId).sh
 # - task: CopyFilesOverSSH@0
 #   inputs:
 #     sshEndpoint: '华北2'
