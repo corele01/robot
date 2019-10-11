@@ -35,7 +35,8 @@ steps:
     containerRegistry: 'robot'
     repository: 'corele/robot'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: 'docker/Dockerfile'
+    buildContext: 'docker/**'
 - task: CmdLine@2
   inputs:
     script: |
