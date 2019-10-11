@@ -36,7 +36,7 @@ steps:
     repository: 'corele/robot'
     command: 'buildAndPush'
     Dockerfile: 'docker/Dockerfile'
-    buildContext: 'docker/**'
+    buildContext: 'docker/*'
 - task: CmdLine@2
   inputs:
     script: |
