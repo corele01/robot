@@ -10,7 +10,7 @@ public enum FaceEnum {
     /**
      * 表情枚举
      */
-    SE(1,"色"),;
+    SE(2,"色"),;
 
 
     private int faceId;
