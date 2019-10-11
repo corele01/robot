@@ -1,11 +1,13 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.enums.FaceEnum;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotSign;
 import com.corele.robot.model.RobotSignHis;
 import com.corele.robot.model.RobotUser;
 import com.corele.robot.processor.dto.MessageContext;
 import com.corele.robot.service.*;
+import com.corele.robot.utils.Face;
 import com.corele.robot.utils.LocalDateTimeUtil;
 import com.corele.robot.utils.MathUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -82,6 +84,6 @@ public class SignInProcessor extends AbstractProcessor{
         if (!addAccountHis){
             
         }
-        return "[CQ:face,id=2] 签到成功 \n";
+        return Face.face(FaceEnum.SE)+ " 签到成功 \n";
     }
 }
