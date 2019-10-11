@@ -42,6 +42,7 @@ steps:
     script: |
       echo Write your commands here
       cat <<EOF > docker-run-$(Build.BuildId).sh
+      #!/bin/sh
       docker run -d -t -i -p 8080:8080 corele/robot:$(Build.BuildId)
       EOF
       cat docker-run-$(Build.BuildId).sh
