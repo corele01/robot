@@ -25,6 +25,7 @@ public class Message {
     }
 
     public static class MessageBuilder{
+        private MessageBuilder(){}
 
         private static Message message;
 

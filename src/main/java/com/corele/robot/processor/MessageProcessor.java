@@ -46,7 +46,7 @@ public class MessageProcessor implements InitializingBean {
 
         AbstractProcessor abstractProcessor = processorMap.get(componentNo);
         if (abstractProcessor != null){
-            return abstractProcessor.handle(context);
+            return abstractProcessor.handleMsg(context);
         }
         return null;
     }
