@@ -12,6 +12,10 @@ public class Face {
      * @return
      */
     public static String face(FaceEnum faceEnum){
-        return "[CQ:face,id="+faceEnum.getFaceId()+"]";
+        return face(faceEnum.getFaceId());
+    }
+
+    public static String face(int faceId) {
+        return "[CQ:face,id="+faceId+"]";
     }
 }

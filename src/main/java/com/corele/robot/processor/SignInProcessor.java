@@ -1,5 +1,7 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.BaseException;
+import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.enums.FaceEnum;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotSign;
@@ -46,11 +48,11 @@ public class SignInProcessor extends AbstractProcessor{
     public String handle(MessageContext messageContext) {
         String groupNo = messageContext.getGroupNo();
         if (StringUtils.isEmpty(groupNo)){
-            return "null";
+            throw BaseException.exception();
         }
         String sendNo = messageContext.getSendNo();
         if (StringUtils.isEmpty(sendNo)) {
-            return "null";
+            throw BaseException.exception();
         }
         RobotUser user = this.robotUserService.getUserBySendNo(groupNo, sendNo);
         RobotAccount robotAccount = null;
@@ -62,13 +64,17 @@ public class SignInProcessor extends AbstractProcessor{
         String today = LocalDateTimeUtil.format(LocalDateTime.now(), "yyyy-MM-dd");
         RobotSignHis signHis = this.robotSignHisService.getByDate(user.getId(), today);
         if (signHis != null){
-            return "您今天已签过到了，改天再来。";
+            return Message.builder()
+                    .addFace(FaceConstant.SHUAI)
+                    .addSpace()
+                    .addString("您今天已经签过了，请明天再来")
+                    .toMsg();
         }
 
         RobotSign signConfig = this.robotSignService.getSignConfigByGroup(groupNo);
         if (signConfig == null){
             log.info("The sign config is not find .");
-            return null;
+            throw BaseException.exception();
         }
         if (robotAccount == null){
             robotAccount  = this.robotAccountService.getByUserId(user.getId());
@@ -79,12 +85,15 @@ public class SignInProcessor extends AbstractProcessor{
         int newMoney = oldMoney + signSize;
         boolean flag = this.robotAccountService.updateAccount(user.getId(), oldMoney, newMoney);
         if (!flag){
-
+            throw BaseException.exception();
         }
         boolean addAccountHis = this.robotAccountHisService.addAccountHisForNow(user.getId(), signSize, "签到所得");
         if (!addAccountHis){
-            
+            throw BaseException.exception();
         }
-        return Face.face(FaceEnum.SE)+ " 签到成功 \n";
+        return Message.builder()
+                .addFace(FaceConstant.SE).addSpace().addString("恭喜！签到成功！").addEnter()
+                .addFace(FaceConstant.SE).addSpace().addString("获得金币：").addString(signSize).addString("个").addEnter()
+                .toMsg();
     }
 }

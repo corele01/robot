@@ -29,7 +29,10 @@ public class RobotAccountServiceImpl implements RobotAccountService {
      */
     @Override
     public RobotAccount getByUserId(Integer userId) {
-        return this.robotAccountMapper.selectByPrimaryKey(userId);
+        Example example = new Example(RobotAccount.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId",userId);
+        return this.robotAccountMapper.selectOneByExample(example);
     }
 
     /**

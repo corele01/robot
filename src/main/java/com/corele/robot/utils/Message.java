@@ -7,24 +7,59 @@ import lombok.Builder;
  */
 public class Message {
 
-    private static StringBuffer message;
+    private StringBuffer messageBuffer;
 
-    private static void initMessage(){
-        message = new StringBuffer();
-    }
-
-    public static void addString(String string){
-        if (message == null){
-            initMessage();
+    public void addString(String string){
+        if (messageBuffer == null){
+            messageBuffer = new StringBuffer();
         }
-        message.append(string);
+        messageBuffer.append(string);
     }
 
-    public static void addEnter(){
-        addString("\n");
+    public static MessageBuilder builder(){
+        return new MessageBuilder();
     }
 
-    public static String toStr(){
-        return message.toString();
+    public String toMessage(){
+        return messageBuffer.toString();
+    }
+
+    public static class MessageBuilder{
+
+        private static Message message;
+
+        public MessageBuilder addString(String string){
+            if (message == null){
+                message = new Message();
+            }
+            message.addString(string);
+            return this;
+        }
+
+        public MessageBuilder addString(Object string){
+            addString(String.valueOf(string));
+            return this;
+        }
+
+        public MessageBuilder addEnter(){
+            addString("\n");
+            return this;
+        }
+
+        public MessageBuilder addFace(int faceId){
+            addString(Face.face(faceId));
+            return this;
+        }
+
+        public MessageBuilder addSpace(){
+            addString(" ");
+            return this;
+        }
+
+        public String toMsg(){
+            String msg = MessageBuilder.message.toMessage();
+            message = new Message();
+            return msg;
+        }
     }
 }
