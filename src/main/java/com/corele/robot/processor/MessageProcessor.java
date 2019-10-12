@@ -56,7 +56,7 @@ public class MessageProcessor implements InitializingBean {
         for (String expr : expressionStrMap.keySet()) {
             Pattern pattern = Pattern.compile(expr);
             Matcher matcher = pattern.matcher(message);
-            boolean flag = matcher.find();
+            boolean flag = matcher.matches();
             if (flag){
                 componentNo = expressionStrMap.get(expr);
                 break;
