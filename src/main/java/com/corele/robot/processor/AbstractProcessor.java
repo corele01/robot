@@ -48,9 +48,9 @@ public abstract class AbstractProcessor {
         if (newSize < 0){
             throw new BaseException(1,
                     Message.builder()
-                            .addFace(FaceConstant.SHUAI)
-                            .addSpace()
-                            .addString("金币不够了，努力吧骚年！")
+                            .face(FaceConstant.SHUAI)
+                            .space()
+                            .string("金币不够了，努力吧骚年！")
                             .toMsg()
             );
         }

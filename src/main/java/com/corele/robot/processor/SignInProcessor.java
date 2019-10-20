@@ -2,14 +2,12 @@ package com.corele.robot.processor;
 
 import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
-import com.corele.robot.enums.FaceEnum;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotSign;
 import com.corele.robot.model.RobotSignHis;
 import com.corele.robot.model.RobotUser;
 import com.corele.robot.processor.dto.MessageContext;
 import com.corele.robot.service.*;
-import com.corele.robot.utils.Face;
 import com.corele.robot.utils.LocalDateTimeUtil;
 import com.corele.robot.utils.MathUtil;
 import com.corele.robot.utils.Message;
@@ -18,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -65,9 +64,9 @@ public class SignInProcessor extends AbstractProcessor{
         RobotSignHis signHis = this.robotSignHisService.getByDate(user.getId(), today);
         if (signHis != null){
             return Message.builder()
-                    .addFace(FaceConstant.SHUAI)
-                    .addSpace()
-                    .addString("您今天已经签过了，请明天再来")
+                    .face(FaceConstant.SHUAI)
+                    .space()
+                    .string("您今天已经签过了，请明天再来")
                     .toMsg();
         }
 
@@ -91,9 +90,20 @@ public class SignInProcessor extends AbstractProcessor{
         if (!addAccountHis){
             throw BaseException.exception();
         }
+
+        RobotSignHis signHisAdd = RobotSignHis.builder()
+                .channel(groupNo)
+                .gmtSign(LocalDate.now())
+                .size(signSize)
+                .userId(user.getId())
+                .build();
+        boolean addHisFlag = this.robotSignHisService.addSignHis(signHisAdd);
+        if (!addHisFlag){
+            throw BaseException.exception();
+        }
         return Message.builder()
-                .addFace(FaceConstant.SE).addSpace().addString("恭喜！签到成功！").addEnter()
-                .addFace(FaceConstant.SE).addSpace().addString("获得金币：").addString(signSize).addString("个").addEnter()
+                .face(FaceConstant.SE).space().string("恭喜！签到成功！").enter()
+                .face(FaceConstant.SE).space().string("获得金币：").string(signSize).string("个")
                 .toMsg();
     }
 }

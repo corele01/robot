@@ -1,7 +1,5 @@
 package com.corele.robot.utils;
 
-import lombok.Builder;
-
 /**
  * @author liujun
  */
@@ -29,7 +27,7 @@ public class Message {
 
         private static Message message;
 
-        public MessageBuilder addString(String string){
+        public MessageBuilder string(String string){
             if (message == null){
                 message = new Message();
             }
@@ -37,23 +35,23 @@ public class Message {
             return this;
         }
 
-        public MessageBuilder addString(Object string){
-            addString(String.valueOf(string));
+        public MessageBuilder string(Object string){
+            string(String.valueOf(string));
             return this;
         }
 
-        public MessageBuilder addEnter(){
-            addString("\n");
+        public MessageBuilder enter(){
+            string("\n");
             return this;
         }
 
-        public MessageBuilder addFace(int faceId){
-            addString(Face.face(faceId));
+        public MessageBuilder face(int faceId){
+            string(Face.face(faceId));
             return this;
         }
 
-        public MessageBuilder addSpace(){
-            addString(" ");
+        public MessageBuilder space(){
+            string(" ");
             return this;
         }
 

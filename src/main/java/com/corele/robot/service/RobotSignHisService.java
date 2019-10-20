@@ -14,4 +14,18 @@ public interface RobotSignHisService {
      * @return
      */
     RobotSignHis getByDate(int userId,String date);
+
+    /**
+     * 插入签到记录
+     * @param robotSignHis
+     * @return
+     */
+    boolean addSignHis(RobotSignHis robotSignHis);
+
+    /**
+     * 取签到次数
+     * @param userId
+     * @return
+     */
+    int getCountForUser(Integer userId);
 }
