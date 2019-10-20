@@ -22,6 +22,7 @@ public class RobotLootingConfig {
     private String channel;
     private Integer max;
     private Integer min;
+    private Double ratio;
     private Integer enable;
     private LocalDateTime gmtCreate;
 

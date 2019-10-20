@@ -11,6 +11,7 @@ import com.corele.robot.utils.Message;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +34,7 @@ public class LootingProcessor extends AbstractProcessor {
      * @return 返回消息
      */
     @Override
+    @Transactional
     public String handle(MessageContext messageContext) {
         List<String> regxList = regxParam(messageContext);
         if (regxList.isEmpty()){
@@ -42,8 +44,6 @@ public class LootingProcessor extends AbstractProcessor {
         if (lootingConfig == null){
             throw BaseException.exception();
         }
-        int random = MathUtil.random(lootingConfig.getMin(), lootingConfig.getMax());
-        RobotAccount userAccount = getAccount(messageContext.getUser().getId());
         String lootNo = regxList.get(1);
         RobotAccount lootAccount = getAccount(messageContext.getGroupNo(), lootNo);
         if (lootAccount == null){
@@ -57,6 +57,14 @@ public class LootingProcessor extends AbstractProcessor {
                     .at(messageContext.getSendNo()).enter()
                     .face(FaceConstant.SHUAI).space().string("对方已经没有钱了").toMsg();
         }
+        boolean isLoot = MathUtil.random(lootingConfig.getRatio());
+        if (!isLoot){
+            return Message.builder()
+                    .at(messageContext.getSendNo()).enter()
+                    .face(FaceConstant.SHUAI).space().string("抢劫失败！！").toMsg();
+        }
+        int random = MathUtil.random(lootingConfig.getMin(), lootingConfig.getMax());
+        RobotAccount userAccount = getAccount(messageContext.getUser().getId());
         if (lootAccountMoney < random){
             random = lootAccountMoney;
         }
