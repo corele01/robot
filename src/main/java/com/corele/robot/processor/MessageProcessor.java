@@ -34,11 +34,11 @@ public class MessageProcessor implements InitializingBean {
     public String handle(MessageContext context){
         String message = context.getMessage();
 
-        String componentNo = regxComponent(message);
+        String componentNo = regxComponent(context);
         if (StringUtils.isEmpty(componentNo)){
             expressionStrMap.clear();
             expressionStrMap = robotMsgConfigService.getMesProcessorList();
-            componentNo = regxComponent(message);
+            componentNo = regxComponent(context);
             if (org.apache.commons.lang3.StringUtils.isEmpty(componentNo)){
                 return null;
             }
@@ -51,14 +51,16 @@ public class MessageProcessor implements InitializingBean {
         return null;
     }
 
-    private String regxComponent(String message) {
+    private String regxComponent(MessageContext message) {
         String componentNo = "";
         for (String expr : expressionStrMap.keySet()) {
             Pattern pattern = Pattern.compile(expr);
-            Matcher matcher = pattern.matcher(message);
+            Matcher matcher = pattern.matcher(message.getMessage());
             boolean flag = matcher.matches();
             if (flag){
                 componentNo = expressionStrMap.get(expr);
+                message.setPattern(expr);
+                message.setComponentNo(componentNo);
                 break;
             }
         }

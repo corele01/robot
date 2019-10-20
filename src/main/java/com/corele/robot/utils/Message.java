@@ -60,5 +60,10 @@ public class Message {
             message = new Message();
             return msg;
         }
+
+        public MessageBuilder at(String userNo){
+            string("[CQ:at,qq="+userNo+"]");
+            return this;
+        }
     }
 }

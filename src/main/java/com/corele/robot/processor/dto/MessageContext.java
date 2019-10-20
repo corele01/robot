@@ -19,4 +19,6 @@ public class MessageContext {
     private String groupNo;
     private String sendNo;
     private RobotUser user;
+    private String pattern;
+    private String componentNo;
 }
