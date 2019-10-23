@@ -54,6 +54,12 @@ public class Message {
             string(" ");
             return this;
         }
+        public MessageBuilder space(int cols){
+            for (int i = 0; i < cols; i++) {
+                string(" ");
+            }
+            return this;
+        }
 
         public String toMsg(){
             String msg = MessageBuilder.message.toMessage();
