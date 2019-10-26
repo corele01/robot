@@ -1,5 +1,6 @@
 package com.corele.robot.common;
 
+import com.corele.robot.utils.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -32,11 +33,12 @@ public class ExceptionAspect {
             return joinPoint.proceed();
         } catch (BaseException ex) {
             log.error("{}",ex);
+            String message = ex.getMessage();
             if (returnType == BaseResponse.class){
-                BaseResponse response = BaseResponse.baseResponse(ex.getErrorCode(),null,ex.getMessage());
+                BaseResponse response = BaseResponse.baseResponse(ex.getErrorCode(),null, message);
                 return response;
             }
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException(message);
         } catch (Throwable throwable){
             log.error("{}",throwable);
             if (returnType == BaseResponse.class){

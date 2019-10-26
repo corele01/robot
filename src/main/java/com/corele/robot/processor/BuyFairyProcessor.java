@@ -68,6 +68,7 @@ public class BuyFairyProcessor extends AbstractProcessor{
         if (!addAccountHis){
             throw BaseException.exception();
         }
+
         int attack = MathUtil.random(robotFairyTemp.getAttackMin(), robotFairyTemp.getAttackMax());
         int defense = MathUtil.random(robotFairyTemp.getDefenseMin(), robotFairyTemp.getDefenseMax());
         String wisdomJson = robotFairyTemp.getWisdom();

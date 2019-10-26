@@ -30,4 +30,8 @@ public class BaseException extends RuntimeException {
     public static BaseException exception(){
         return new BaseException(0,"系统异常，请联系管理员");
     }
+
+    public static BaseException exceptionForMsg(String message){
+        return new BaseException(1,message);
+    }
 }
