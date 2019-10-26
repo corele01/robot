@@ -1,12 +1,13 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.convert.FairyConvert;
 import com.corele.robot.model.RobotFairyRecord;
 import com.corele.robot.model.RobotFairySearchConfig;
 import com.corele.robot.model.RobotFairyTemp;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotFairySearchConfigService;
 import com.corele.robot.service.RobotFairyTempService;
 import com.corele.robot.utils.JsonUtil;

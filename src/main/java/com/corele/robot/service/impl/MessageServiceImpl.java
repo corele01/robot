@@ -3,7 +3,7 @@ package com.corele.robot.service.impl;
 import com.corele.robot.dto.MessageInfo;
 import com.corele.robot.model.RobotUser;
 import com.corele.robot.processor.MessageProcessor;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

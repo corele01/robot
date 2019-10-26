@@ -1,6 +1,7 @@
 package com.corele.robot.processor;
 
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.AbstractProcessor;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotMsgConfigService;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.InitializingBean;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,7 @@ public class MessageProcessor implements InitializingBean {
     @Autowired
     private RobotMsgConfigService robotMsgConfigService;
     @Autowired
-    private Map<String,AbstractProcessor> processorMap;
+    private Map<String, AbstractProcessor> processorMap;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -32,7 +32,6 @@ public class MessageProcessor implements InitializingBean {
     }
 
     public String handle(MessageContext context){
-        String message = context.getMessage();
 
         String componentNo = regxComponent(context);
         if (StringUtils.isEmpty(componentNo)){

@@ -1,10 +1,8 @@
-package com.corele.robot.processor;
+package com.corele.robot.common;
 
-import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotUser;
-import com.corele.robot.processor.dto.MessageContext;
 import com.corele.robot.service.*;
 import com.corele.robot.utils.Message;
 import com.google.common.collect.Lists;
@@ -35,7 +33,7 @@ public abstract class AbstractProcessor {
     @Transactional(rollbackFor = Throwable.class)
     public abstract String handle(MessageContext messageContext);
 
-    String handleMsg(MessageContext messageContext){
+    public String handleMsg(MessageContext messageContext){
         String resultMsg = handle(messageContext);
         return resultMsg;
     }

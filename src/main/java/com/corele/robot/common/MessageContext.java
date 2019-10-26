@@ -1,4 +1,4 @@
-package com.corele.robot.processor.dto;
+package com.corele.robot.common;
 
 import com.corele.robot.model.RobotUser;
 import lombok.AllArgsConstructor;

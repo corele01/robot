@@ -1,18 +1,18 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotFairyRecord;
 import com.corele.robot.model.RobotFairyTemp;
 import com.corele.robot.model.dto.WisdomDTO;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotFairyRecordService;
 import com.corele.robot.service.RobotFairyTempService;
 import com.corele.robot.utils.JsonUtil;
 import com.corele.robot.utils.MathUtil;
 import com.corele.robot.utils.Message;
-import com.corele.robot.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author liujun
  */
 @Service("buyFairy")
-public class BuyFairyProcessor extends AbstractProcessor{
+public class BuyFairyProcessor extends AbstractProcessor {
 
     @Autowired
     private RobotFairyRecordService robotFairyRecordService;

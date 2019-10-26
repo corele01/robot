@@ -1,12 +1,13 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotSign;
 import com.corele.robot.model.RobotSignHis;
 import com.corele.robot.model.RobotUser;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.*;
 import com.corele.robot.utils.LocalDateTimeUtil;
 import com.corele.robot.utils.MathUtil;
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component("signIn")
-public class SignInProcessor extends AbstractProcessor{
+public class SignInProcessor extends AbstractProcessor {
 
     @Autowired
     private RobotSignService robotSignService;

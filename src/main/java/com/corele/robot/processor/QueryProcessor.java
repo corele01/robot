@@ -1,9 +1,10 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotUser;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotFairyRecordService;
 import com.corele.robot.service.RobotSignHisService;
 import com.corele.robot.utils.Message;

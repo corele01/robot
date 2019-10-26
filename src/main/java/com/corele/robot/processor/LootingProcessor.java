@@ -1,22 +1,20 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.common.BaseException;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotAccount;
 import com.corele.robot.model.RobotLootingConfig;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotLootingConfigService;
 import com.corele.robot.utils.MathUtil;
 import com.corele.robot.utils.Message;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author liujun

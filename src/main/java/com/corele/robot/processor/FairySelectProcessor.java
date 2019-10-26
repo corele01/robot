@@ -1,8 +1,9 @@
 package com.corele.robot.processor;
 
+import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.model.RobotFairyTemp;
-import com.corele.robot.processor.dto.MessageContext;
+import com.corele.robot.common.MessageContext;
 import com.corele.robot.service.RobotFairyTempService;
 import com.corele.robot.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
