@@ -2,6 +2,7 @@ package com.corele.robot.processor;
 
 import com.corele.robot.common.AbstractProcessor;
 import com.corele.robot.common.BaseException;
+import com.corele.robot.common.RedisComponent;
 import com.corele.robot.constants.FaceConstant;
 import com.corele.robot.convert.FairyConvert;
 import com.corele.robot.model.RobotFairyRecord;
@@ -29,6 +30,8 @@ public class FairySearchProcessor extends AbstractProcessor {
     private RobotFairySearchConfigService robotFairySearchConfigService;
     @Autowired
     private RobotFairyTempService robotFairyTempService;
+    @Autowired
+    private RedisComponent redisComponent;
     /**
      * 处理消息
      *
@@ -56,6 +59,7 @@ public class FairySearchProcessor extends AbstractProcessor {
             throw BaseException.exception();
         }
         RobotFairyRecord robotFairyRecord = FairyConvert.convert(temp, messageContext.getUser().getId());
+        redisComponent.set("FAIRY_SEARCH:"+messageContext.getGroupNo()+":"+messageContext.getSendNo(),robotFairyRecord,60*5);
         return Message.builder().at(messageContext.getSendNo()).enter()
                 .face(FaceConstant.SE).space().string("恭喜搜索到精灵！！！！").enter()
                 .face(FaceConstant.SE).space().string("名称：").string(robotFairyRecord.getFairyName()).enter()
