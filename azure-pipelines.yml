@@ -43,6 +43,12 @@ steps:
       echo Write your commands here
       cat <<EOF > docker-run-$(Build.BuildId).sh
       #!/bin/sh
+      PID=ps -ef | grep robot | awk '{print $2}'
+      for id in $PID
+      do
+      kill -9 $id
+      done
+      docker rm $(sudo docker ps -a -q)
       docker run -d -t -i -p 8080:8080 corele/robot:$(Build.BuildId)
       EOF
       cat docker-run-$(Build.BuildId).sh
@@ -61,9 +67,3 @@ steps:
     commands: |
       chmod +x /opt/application/docker-run-$(Build.BuildId).sh
       /opt/application/docker-run-$(Build.BuildId).sh
-# - task: CopyFilesOverSSH@0
-#   inputs:
-#     sshEndpoint: '华北2'
-#     sourceFolder: 'target'
-#     contents: 'robot.jar'
-#     targetFolder: '/opt/application/'
