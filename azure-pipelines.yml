@@ -43,12 +43,7 @@ steps:
       echo Write your commands here
       cat <<EOF > docker-run-$(Build.BuildId).sh
       #!/bin/sh
-      PID=ps -ef | grep robot | awk '{print $2}'
-      for id in $PID
-      do
-      kill -9 $id
-      done
-      docker rm $(sudo docker ps -a -q)
+      sh /opt/application/clear.sh
       docker run -d -t -i -p 8080:8080 corele/robot:$(Build.BuildId)
       EOF
       cat docker-run-$(Build.BuildId).sh
